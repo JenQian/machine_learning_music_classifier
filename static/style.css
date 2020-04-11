@@ -1,0 +1,20 @@
+body {
+    background-color: black;
+  }
+
+.jumbotron {
+    margin-top: 25px !important;
+    /* display: inline-block!important; */
+  }
+
+.genre_predict {
+    background-color: lightblue;
+    text-align: center;
+    /* display: inline-block!important; */
+  }
+
+.actual_genre {
+    background-color: lightgreen;
+    text-align: center;
+    /* display: inline-block!important; */
+  }
