@@ -1,20 +1,25 @@
 body {
     background-color: black;
+    font-family: Didact Gothic, sans-serif;
   }
 
 .jumbotron {
     margin-top: 25px !important;
+    padding-top: 25px;
+    height: 600px;
     /* display: inline-block!important; */
   }
 
 .genre_predict {
-    background-color: lightblue;
+    background-color: black;
     text-align: center;
+    color: greenyellow;
     /* display: inline-block!important; */
   }
 
 .actual_genre {
-    background-color: lightgreen;
+    background-color: black;
     text-align: center;
+    color: greenyellow;
     /* display: inline-block!important; */
   }
