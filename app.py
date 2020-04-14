@@ -1,16 +1,20 @@
-# @app.route("/")
-# def index():
-#   with open('audio_only.csv') as csv_file:
-#     data = csv.reader(csv_file, delimiter=',')
-#     first_line = True
-#     places = []
-#     for row in data:
-#       if not first_line:
-#         places.append({
-#           "city": row[0],
-#           "attraction": row[1],
-#           "gif_url": row[2]
-#         })
-#       else:
-#         first_line = False
-#   return render_template("index.html", places=places)
+from flask import request, Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+  
+
+@app.route("/handledata", methods=["POST"])
+def handledata():
+    print(request.form["input_song"])
+
+    return render_template("index.html", song_name=request.form["input_song"])
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
