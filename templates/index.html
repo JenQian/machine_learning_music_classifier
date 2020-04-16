@@ -47,16 +47,16 @@
           <!-- right side -->
           <div class="col-sm">
             <div class="jumbotron">
-                <h1 class="display-4">{{ song_name["song_name"] }}</h1>
+                <h1 class="display-4">{{ song_name }}</h1>
                 <br>
                                 <!-- prediction -->
                                 <div class="genre_predict">
-                                    <h3>Predicted Genre: Techno 50%</h3>
+                                    <h3>Predicted Genre: {{ user_song_genre }}</h3>
                                 </div>
                                 <br>
                                 <!-- actual -->
                                 <div class="actual_genre">
-                                    <h3>Actual Genre: Techno </h3>
+                                    <h3>Actual Genre: {{ actual_genre }} </h3>
                                 </div>
                                 <br>
                                 <h4>Song Recommendations Based on Genre</h6>

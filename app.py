@@ -4,7 +4,7 @@ import pickle
 app = Flask(__name__)
 
 # Load the model
-with open('pickle413.joblib', 'r') as pkl:    
+with open('pickle415.pickle', 'rb') as pkl:    
     model = pickle.load(pkl)
 
 genres={1: 'Movie',
@@ -137,10 +137,10 @@ def index():
 def handledata():
     
     # use helper function to get result
-    song_output=use_model(request.form["input_song"])
+    song_name=use_model(request.form["input_song"])
 
 
-    return render_template("index.html", song_name=song_output)
+    return render_template("index.html", **song_name)
 
     
 
