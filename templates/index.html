@@ -56,8 +56,10 @@
                                 <br>
                                 <!-- actual -->
                                 <div class="actual_genre">
-                                    <h3>Actual Genre: {{ actual_genre }} </h3>
+                                    <h3>Confidence: {{ confidence }} </h3>
                                 </div>
+                                <img src="{{ artwork }}" height="200" width="200" alt="">
+                                
                                 <br>
                                 <h4>Song Recommendations Based on Genre</h6>
                                 <!-- recommended songs -->
@@ -67,7 +69,7 @@
                                     Integer at orci feugiat, facilisis felis aliquam, ullamcorper dui.<br>
                                     Vestibulum luctus mi a orci tempus, id laoreet sapien suscipit.
                                 </p>
-                                <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                <iframe src="https://open.spotify.com/embed/track/{{ song_id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
           </div>
 

@@ -111,6 +111,7 @@ def get_requested_song_df(title):
 def use_model(user_input_song):
     result_dictionary=get_requested_song_df(user_input_song)
     prediction=model.predict(result_dictionary["model_df"])
+    confidence=f"{np.amax(model.predict_proba(result_dictionary['model_df'])):.2%}"
     # turn prediction into text
     spotify_dict={
         "user_song_genre":genres[prediction[0]],
@@ -118,7 +119,8 @@ def use_model(user_input_song):
         "artist_name":result_dictionary["artist_name"],
         "artwork":result_dictionary["artwork"],
         "actual_genre":result_dictionary["actual_genre"],
-        "song_id":result_dictionary["song_id"]
+        "song_id":result_dictionary["song_id"],
+        "confidence":confidence
     }
     return spotify_dict
     
