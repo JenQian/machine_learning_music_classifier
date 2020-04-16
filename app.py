@@ -62,10 +62,10 @@ def index():
 def handledata():
     
     # use helper function to get result
-    song_name=use_model(request.form["input_song"])
+    song_output=use_model(request.form["input_song"])
 
 
-    return render_template("index.html", song_name=song_name)
+    return render_template("index.html", song_name=song_output)
 
     
 
