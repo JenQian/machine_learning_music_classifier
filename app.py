@@ -66,44 +66,52 @@ categoricals = [
     'tempo',
     'time_signature',
     'valence'
-#     ''
+
 ]
 
 
+
+
+
 def get_requested_song_df(title):
-    q = title
-    result = auth_spotify.search(q)
-    result_track_id = result['tracks']["items"][0]["id"]
-    result_track_features =  auth_spotify.audio_features(result_track_id)
-    result_track=pd.DataFrame()
-    for i in categoricals:
-            result_track[i] = [0]
-    for i in categoricals:
-            result_track[i] = result_track_features[0][i]
-    result_track['explicit'] = auth_spotify.track(result_track_id)["explicit"]
-    result_track['explicit'] = result_track['explicit'].map({
-        True: 1,  
-        False: 0,    
-    })
-    result_track['release_year']=auth_spotify.track(result_track_id)["album"]["release_date"][:4]
-    song_name = auth_spotify.track(result_track_id)["name"]
-    artist_name = auth_spotify.track(result_track_id)["album"]["name"]
-    artwork = auth_spotify.track(result_track_id)["album"]["images"][0]["url"]
-    actual_genre = []
-    recommendations =[]
-    song_id =result_track_id
-    preview_url = auth_spotify.track(result_track_id)["preview_url"]
-    
-    return {"model_df":result_track, 
-            "song_name":song_name,
-            "artist_name":artist_name,
-            "artwork":artwork,
-            "actual_genre":actual_genre,
-            "song_id":song_id,
-            "preview_url":preview_url
-            
-            
-           }
+        q = title
+        result = auth_spotify.search(q)
+        result_track_id = result['tracks']["items"][0]["id"]
+        result_track_features =  auth_spotify.audio_features(result_track_id)
+        result_track=pd.DataFrame()
+        for i in categoricals:
+                result_track[i] = [0]
+        for i in categoricals:
+                result_track[i] = result_track_features[0][i]
+        result_track['explicit'] = auth_spotify.track(result_track_id)["explicit"]
+        result_track['explicit'] = result_track['explicit'].map({
+            True: 1,  
+            False: 0,    
+        })
+        result_track['release_year']=auth_spotify.track(result_track_id)["album"]["release_date"][:4]
+        song_name = auth_spotify.track(result_track_id)["name"]
+        artist_name = auth_spotify.track(result_track_id)["album"]["name"]
+        artwork = auth_spotify.track(result_track_id)["album"]["images"][0]["url"]
+        artist_id = auth_spotify.track(result_track_id)["artists"][0]["id"]
+        actual_genre = ", ".join(auth_spotify.artist(artist_id)["genres"])
+        recommendation_track_name =auth_spotify.recommendations(seed_artists=[artist_id],seed_tracks=[result_track_id])\
+        ["tracks"][0]["name"]
+        recommendation_url = []
+        recommendation_artist_name =auth_spotify.recommendations(seed_artists=[artist_id],seed_tracks=[result_track_id])\
+        ["tracks"][0]["artists"][0]["name"]
+        song_id = result_track_id
+        preview_url = auth_spotify.track(result_track_id)["preview_url"]
+        return {"model_df":result_track, 
+                "song_name":song_name,
+                "artist_name":artist_name,
+                "artwork":artwork,
+                "actual_genre":actual_genre,
+                "song_id":song_id,
+                "preview_url":preview_url,
+                "recommendation_track_name": recommendation_track_name,
+                "recommendation_artist_name": recommendation_artist_name,
+                 "artist_id": artist_id}
+  
   
 
 
@@ -120,7 +128,9 @@ def use_model(user_input_song):
         "artwork":result_dictionary["artwork"],
         "actual_genre":result_dictionary["actual_genre"],
         "song_id":result_dictionary["song_id"],
-        "confidence":confidence
+        "confidence":confidence,
+        "recommendation_track_name":result_dictionary["recommendation_track_name"],
+        "recommendation_artist_name":result_dictionary["recommendation_artist_name"]
     }
     return spotify_dict
     

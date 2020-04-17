@@ -12,8 +12,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
-  <!-- Our CSS -->
+  <!-- Our CSS  and theme-->
   <link rel="stylesheet" type="text/css" href="static/style.css">
+  
 
   <!-- font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
@@ -24,52 +25,67 @@
 <body>
 
     <div class="container">
+      <div class="text-center"><h1 class="display-4">Machine Learning Song Genre Predictor</h1></div>
         <div class="row">
             <!-- left side -->
           <div class="col-sm">
             <div class="jumbotron">
-                <h1 class="display-4">Machine Learning Song Genre Predictor</h1>
-                <p class="lead">This app uses machine learning to predict the genre of your chosen song.</p>
-                <hr class="my-4">
+                
+                <br>
                 <!-- song input -->
             <form action="{{ url_for('handledata') }}" method="POST">
                 <div class="input_container">
-                    <label for="date">Input a song</label>
+                    <label for="date">Input a song (you can just input title, or title and artist)</label>
                     <input class="form-control" id="song_input" type="text" placeholder="Random Song" name="input_song">
                 </div>
+                
                 <br>
                 <!-- button -->
-                <input  type="submit" >Find Genre</input>
+                <input  type="submit" > </input>
             </form>
+            <hr class="my-4">
+            <h5>About the Machine Learning Model:</h5>
+            This model was trained with a dataset of over 200,000 songs from Spotify, 24 genres, 
+            and ___ audio features (ex. acousticness, danceability, energy, loudness).  The song 
+            you input is retrieved using the Spotify API, then run through the model.
+            <br>
+            <p class="text-success">Created by Columbia Engineering Data Analytics Bootcamp Students - <br> Roaya Helal, Emma Pang, Jennifer Qian, and James Zheng.</p>
             </div>
           </div>
 
           <!-- right side -->
           <div class="col-sm">
-            <div class="jumbotron">
-                <h1 class="display-4">{{ song_name }}</h1>
-                <br>
+            <div class="jumbotron"><br>
+              <div class="text-center">
+                <h4> {{ song_name }}</h4>
+                <img src="{{ artwork }}" height="200" width="200" alt=""> <br> <br>
                                 <!-- prediction -->
-                                <div class="genre_predict">
-                                    <h3>Predicted Genre: {{ user_song_genre }}</h3>
+                                <div class="genre_predict"><h5>
+                                    Predicted Genre: {{ user_song_genre }}
+                                  </h5>
                                 </div>
-                                <br>
+                                
                                 <!-- actual -->
-                                <div class="actual_genre">
-                                    <h3>Confidence: {{ confidence }} </h3>
+                                <div class="actual_genre"><h5>
+                                    Confidence: {{ confidence }} 
+                                  </h5>
                                 </div>
-                                <img src="{{ artwork }}" height="200" width="200" alt="">
+                                <div class="actual_genre"><h5>
+                                  Actual Genre: {{ actual_genre }} 
+                                </h5>
+                              </div>
+                              <br>
+                                
+                                <iframe src="https://open.spotify.com/embed/track/{{ song_id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                              </div>
                                 
                                 <br>
-                                <h4>Song Recommendations Based on Genre</h6>
+                                <h5>Song Recommendations Based on Genre</h5>
                                 <!-- recommended songs -->
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                                    Sed vitae metus quis mi fringilla aliquet ac id metus.<br>
-                                    Integer at orci feugiat, facilisis felis aliquam, ullamcorper dui.<br>
-                                    Vestibulum luctus mi a orci tempus, id laoreet sapien suscipit.
+                                  {{ recommendation_track_name }} by {{ recommendation_artist_name }}<br>
+
                                 </p>
-                                <iframe src="https://open.spotify.com/embed/track/{{ song_id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
           </div>
 
