@@ -96,7 +96,8 @@ def get_requested_song_df(title):
         actual_genre = ", ".join(auth_spotify.artist(artist_id)["genres"])
         recommendation_track_name =auth_spotify.recommendations(seed_artists=[artist_id],seed_tracks=[result_track_id])\
         ["tracks"][0]["name"]
-        recommendation_url = []
+        recommendation_url =auth_spotify.recommendations(seed_artists=[artist_id],seed_tracks=[result_track_id])\
+        ["tracks"][0]["external_urls"]["spotify"]
         recommendation_artist_name =auth_spotify.recommendations(seed_artists=[artist_id],seed_tracks=[result_track_id])\
         ["tracks"][0]["artists"][0]["name"]
         song_id = result_track_id
@@ -110,6 +111,7 @@ def get_requested_song_df(title):
                 "preview_url":preview_url,
                 "recommendation_track_name": recommendation_track_name,
                 "recommendation_artist_name": recommendation_artist_name,
+                "recommendation_url":recommendation_url,
                  "artist_id": artist_id}
   
   
@@ -130,7 +132,8 @@ def use_model(user_input_song):
         "song_id":result_dictionary["song_id"],
         "confidence":confidence,
         "recommendation_track_name":result_dictionary["recommendation_track_name"],
-        "recommendation_artist_name":result_dictionary["recommendation_artist_name"]
+        "recommendation_artist_name":result_dictionary["recommendation_artist_name"],
+        "recommendation_url":result_dictionary["recommendation_url"]
     }
     return spotify_dict
     

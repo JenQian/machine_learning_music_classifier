@@ -43,12 +43,14 @@
                 <!-- button -->
                 <input  type="submit" > </input>
             </form>
-            <hr class="my-4">
+            <br>
             <h5>About the Machine Learning Model:</h5>
             This model was trained with a dataset of over 200,000 songs from Spotify, 24 genres, 
             and ___ audio features (ex. acousticness, danceability, energy, loudness).  The song 
             you input is retrieved using the Spotify API, then run through the model.
             <br>
+            <div class="img"></div>
+            
             <p class="text-success">Created by Columbia Engineering Data Analytics Bootcamp Students - <br> Roaya Helal, Emma Pang, Jennifer Qian, and James Zheng.</p>
             </div>
           </div>
@@ -77,15 +79,18 @@
                               <br>
                                 
                                 <iframe src="https://open.spotify.com/embed/track/{{ song_id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                              
+                                <br>
+                                <br>
+                                <h5>Song Recommendation</h5>
+                                <!-- recommended songs -->
+                                <h6>
+                                  
+                                  
+                                  <a href="{{ recommendation_url }}" target="blank">{{ recommendation_track_name }} by {{ recommendation_artist_name }}</a>
+                                </h6>
                               </div>
                                 
-                                <br>
-                                <h5>Song Recommendations Based on Genre</h5>
-                                <!-- recommended songs -->
-                                <p>
-                                  {{ recommendation_track_name }} by {{ recommendation_artist_name }}<br>
-
-                                </p>
             </div>
           </div>
 
