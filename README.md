@@ -2,6 +2,8 @@
 
 This model was trained with a dataset of over 200,000 songs from Spotify, 24 genres, and 15 audio analysis features (ex. acousticness, danceability, energy, loudness). A song search leads to a Spotify API call to retrive audio analysis features along with the artist's actual genre and the song's mini-player ID to update the page. The audio analysis features are used as input to the ML model to output the predicted genre with a confidence percentage.
 
+![alt text](http://url/to/img.png)
+
 ## Highlights
 Data Exploration: 232k songs from Spotify with 26 genres + 15 audio analysis features                                                          
 26 genres of songs classified by Spotify     
