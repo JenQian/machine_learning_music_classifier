@@ -41,12 +41,13 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import sys
 import spotipy.util as util
 import datetime
+from config import *
 
 
 #set up API authonatication
-SPOTIPY_CLIENT_ID = 'a2881ef09dc449bca632dc11c5142ea9'
-SPOTIPY_CLIENT_SECRET = '2b969d5254f34183a5e65d2f9563b8c9'
-username = 'jq42@cornell.edu'
+SPOTIPY_CLIENT_ID = CLIENT_ID
+SPOTIPY_CLIENT_SECRET = CLIENT_SECRET
+username = spotify_username
 scope = 'user-read-private user-read-email'
 uri = 'http://localhost'
 client_cred = SpotifyClientCredentials(SPOTIPY_CLIENT_ID,SPOTIPY_CLIENT_SECRET)
